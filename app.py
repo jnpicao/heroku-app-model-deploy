@@ -32,7 +32,6 @@ class Prediction(Model):
     observation_id = IntegerField(unique=True)
     observation = TextField()
     proba = FloatField()
-    pred_class = BooleanField()
     true_class = IntegerField(null=True)
 
     class Meta:
@@ -76,14 +75,12 @@ def predict():
     
     observation = obs_dict['observation']
     obs = pd.DataFrame([observation], columns=columns).astype(dtypes)
-    proba = pipeline.predict_proba(obs)[0, 1]
-    pred_class = proba > 0.5
+    proba = pipeline.predict_proba(obs.values)[0, 1]
     
-    response = {'pred_class': pred_class}
+    response = {'proba': proba}
     p = Prediction(
         observation_id=_id,
         proba=proba,
-        pred_class = pred_class,
         observation=request.data,
     )
     
