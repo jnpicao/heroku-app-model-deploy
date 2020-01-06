@@ -20,7 +20,7 @@ from sklearn.externals import joblib
 from flask import Flask, request, jsonify
 from peewee import (
     SqliteDatabase, PostgresqlDatabase, Model, IntegerField,
-    FloatField, BooleanField, TextField,
+    FloatField, BooleanField, TextField, IntegrityError
 )
 from playhouse.shortcuts import model_to_dict
 
@@ -94,7 +94,6 @@ def predict():
     observation = obs_dict['observation']
     obs = pd.DataFrame([observation], columns=columns).astype(dtypes)
     proba = pipeline.predict_proba(obs)[0, 1]
-    
     response = {'proba': proba}
     p = Prediction(
         observation_id=_id,
