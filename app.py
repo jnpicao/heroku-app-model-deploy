@@ -12,6 +12,7 @@ Created on Thu Dec 26 12:34:26 2019
 # the jsonify function is useful for when we want to return
 # json from the function we are using.
 
+import os
 import json
 import pickle
 import pandas as pd
