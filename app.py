@@ -100,7 +100,7 @@ def predict():
     else:
         response_val = 0
     
-    response = {'Clearance Instruction:': response_val}
+    response = {"ContrabandIndicator": response_val}
     p = Prediction(
         observation_id=_id,
         proba=proba,
