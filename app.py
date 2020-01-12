@@ -98,7 +98,7 @@ def predict():
     if proba > 0.5:
         response_val = 1
     else:
-        response_val = 1
+        response_val = 0
     
     response = {'Clearance Instruction:': response_val}
     p = Prediction(
