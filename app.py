@@ -94,7 +94,13 @@ def predict():
     observation = obs_dict['observation']
     obs = pd.DataFrame([observation], columns=columns).astype(dtypes)
     proba = pipeline.predict_proba(obs)[0, 1]
-    response = {'Clearance Instruction:': proba > 0.5}
+    
+    if proba > 0.5:
+        response_val = 1
+    else:
+        response_val = 1
+    
+    response = {'Clearance Instruction:': response_val}
     p = Prediction(
         observation_id=_id,
         proba=proba,
